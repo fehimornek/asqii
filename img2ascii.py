@@ -13,6 +13,7 @@ def img_resize(image, new_width = 100):
 
 def rgb2gray(image): return image.convert('L')
 
+# from images returns ascii strings
 def pixel2ascii(image, new_width = 100):
     pixels = list(image.getdata())
 
@@ -36,11 +37,6 @@ def pixel2ascii(image, new_width = 100):
 
     # turn the list into string
     ascii_str = ''.join(ascii_characters_list)
+    # ascii image as a string
     ascii_image = "\n".join([ascii_str[index:(index+new_width)] for index in range(0, len(ascii_str), new_width)])
-    print(ascii_image)
-
-
-img = Image.open("meta.png")
-resized = img_resize(img)
-gray = rgb2gray(resized)
-pixel2ascii(gray)
+    return ascii_image
