@@ -22,12 +22,3 @@ def image_creator(ascii_string, ascii_width, ascii_height):
     draw.text((0, 0), ascii_string, fill="black", font=font)
 
     image.show()
-
-
-img = Image.open("ang.jpg")
-resized = img_resize(img, new_width=20)
-gray = rgb2gray(resized)
-ascii_img = pixel2ascii(gray, new_width=20)
-
-ascii_width, ascii_height = get_text_resolution(ascii_img)
-image_creator(ascii_img, ascii_width, ascii_height)
