@@ -1,6 +1,21 @@
 from PIL import Image, ImageDraw, ImageFont
 from img2ascii import *
 
+def char_get_max_size(ascii_string, original_img):
+    img_width, img_height = original_img.size       # For example 1920x1080 => img_width=1920, img_height = 1080
+
+    ascii_string = ascii_string.replace('\n', 'e')  # Change '\n' with e because \n is a pain to deal with in general
+    # split the part before getting an 'e' this is the characters that we have to fit horizontally
+    ascii_char_count_horizontal = len(ascii_string.split('e')[0])
+    # count number of 'e' this is the amount of vertical spaces we need
+    # also we add +1 because the last line doesnt contain '\n' or 'e'
+    ascii_char_count_vertical = ascii_string.count('e') + 1
+    print(ascii_char_count_horizontal, ascii_char_count_vertical)
+    len_char_x = img_width / ascii_char_count_horizontal
+    len_char_y = img_height / ascii_char_count_vertical
+
+    return len_char_x, len_char_y
+"""
 def get_text_resolution(ascii_string, font_size = 10):
     # Create a new temp image to get the texts required resolution
     temp_image = Image.new("L", (1, 1))
@@ -9,7 +24,7 @@ def get_text_resolution(ascii_string, font_size = 10):
     font = ImageFont.truetype("cour.ttf", font_size)
     text_width, text_height = draw.textsize(ascii_string, font)
     return text_width, text_height
-
+"""
 def image_creator(ascii_string, ascii_width, ascii_height):
     # replace values of \n with e because checking for double character is problematic and \ is a pain to check
     ascii_string_mapped = ascii_string.replace('\n','e')
