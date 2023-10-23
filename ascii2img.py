@@ -32,15 +32,3 @@ def image_creator(ascii_string, ascii_width, ascii_height):
         x += 5
         
     image.show()
-
-
-img = Image.open("ang.jpg")
-resized = img_resize(img, new_width=100)
-
-gray = rgb2gray(resized)
-
-ascii_img = pixel2ascii(gray, new_width=100)
-
-ascii_width, ascii_height = get_text_resolution(ascii_img)
-
-image_creator(ascii_img, ascii_width, ascii_height)
