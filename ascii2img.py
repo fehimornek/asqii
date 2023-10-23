@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 from img2ascii import *
+import math
 
 def char_get_max_size(ascii_string, original_img):
     img_width, img_height = original_img.size       # For example 1920x1080 => img_width=1920, img_height = 1080
@@ -15,6 +16,12 @@ def char_get_max_size(ascii_string, original_img):
     len_char_y = img_height / ascii_char_count_vertical
 
     return len_char_x, len_char_y
+
+def calc_font_size(x_max_size, y_max_size):
+    font_size = x_max_size / 2
+    space_size = (font_size + math.modf(font_size)[0]) / 2
+    return int(font_size), space_size
+
 """
 def get_text_resolution(ascii_string, font_size = 10):
     # Create a new temp image to get the texts required resolution
@@ -25,6 +32,7 @@ def get_text_resolution(ascii_string, font_size = 10):
     text_width, text_height = draw.textsize(ascii_string, font)
     return text_width, text_height
 """
+
 def image_creator(ascii_string, ascii_width, ascii_height):
     # replace values of \n with e because checking for double character is problematic and \ is a pain to check
     ascii_string_mapped = ascii_string.replace('\n','e')
